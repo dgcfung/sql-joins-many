@@ -238,3 +238,12 @@ WHERE country.name = 'Brazil';
 - Find all songs released on `Virgin Records` that have a `popularity` score > 30
 - Find the artist who has released tracks on the most albums
     Hint: The last few may need more than one `join` clause each
+
+# Further Practice
+
+- [SQL for Beginners](https://www.codewars.com/collections/sql-for-beginners/): Created by WDI14 graduate and current GA instructor Mike Nabil.
+- [SQL Zoo](https://sqlzoo.net/)
+- [Code School Try SQL](https://www.codeschool.com/courses/try-sql)
+- [W3 Schools SQL tutorial](https://www.w3schools.com/sql/)
+- [Postgres Guide](http://postgresguide.com/)
+- [SQL Course](http://www.sqlcourse.com/)

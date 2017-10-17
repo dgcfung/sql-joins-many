@@ -37,6 +37,8 @@ sequence of clues/queries from the homework probably made clear.
 The next step in effectively analyzing and organizing our data is grounded
 in `relationships`, as in relational database.
 
+Note: It is possible to explicitly include the table name in a select statement
+
 
 ## Introduction
 

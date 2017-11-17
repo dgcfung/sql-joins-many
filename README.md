@@ -10,9 +10,6 @@
 - Select data about many-to-many relationships using join tables.
 
 
-Note: It is possible to explicitly include the table name in a select statement
-
-
 ## Introduction
 
 While it is conceivable to store all of the data that is needed for a particular domain model object or resource in a single table, there are numerous downsides to such an approach.  For example, in the cheesy sql exercise, if we wanted to update the name `America` or `Ireland` to `United States of America` or `Republic Of Ireland`, we would have to update every single row in the `cheese` table that referred to either of these places of origin.  Thus, `redundancy` of common data points can make altering or updating these fields difficult.  

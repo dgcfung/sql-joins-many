@@ -4,43 +4,21 @@
 
 ## Learning Objectives
 
-- Define what a foreign key is
-- Describe how to represent a one-to-many relationship in SQL database
-- Explain how to represent one-to-one and many-to-many relationships in a SQL DB
-- Distinguish between keys, foreign keys, and indexes
-- Describe the purpose of the JOIN
-- Use JOIN to combine tables in a SELECT
-- Describe what it means for a database to be normalized
+- Create tables with foreign key references.
+- Create join tables to represent many-to-many relationships.
+- Insert rows in join tables to create many-to-many relationships.
+- Select data about many-to-many relationships using join tables.
 
-## Review: Carmen Sandiego
-
-Going back to the Carmen Sandiego homework, recall that there were three tables
-in the database schema, viz., `city`, `country`, and `countrylanguage`.  If we wanted
-to access data from more than one table, multiple SQL queries were needed.
-
-For example, to get all the languages spoken in the Netherlands, first we would
-need a SQL statement to get the countrycode for the Netherlands
-```sql
-carmen=# SELECT code FROM country WHERE name = 'Netherlands';
--[ RECORD 1 ]
-code | NLD
-```
-
-Then a second SQL statement to get the languages that match that
-```sql
-carmen=# SELECT * FROM countrylanguage WHERE countrycode = 'NLD';
-. . .
-```
-
-But this is very verbose and makes gathering complex data tedious, as the
-sequence of clues/queries from the homework probably made clear.
-The next step in effectively analyzing and organizing our data is grounded
-in `relationships`, as in relational database.
 
 Note: It is possible to explicitly include the table name in a select statement
 
 
 ## Introduction
+
+While it is conceivable to store all of the data that is needed for a particular domain model object or resource in a single table, there are numerous downsides to such an approach.  For example, in the cheesy sql exercise, if we wanted to update the name `America` or `Ireland` to `United States of America` or `Republic Of Ireland`, we would have to update every single row in the `cheese` table that referred to either of these places of origin.  Thus, `redundancy` of common data points can make altering or updating these fields difficult.  
+
+Further, there are weak guarantees for the consistency and correctness of hard-coded fields in a single column; what prevents a developer who is working on a different feature from using `french` rather than `France` when inserting new rows into the `cheese` table?  Leveraging table relations can improve `data integrity` and provide stronger guarantees regarding the consistency and correctness of what we store and retrieve from a database.
+
 
 One of the key features of relational databases is that they can represent
 relationships between rows in different tables.
@@ -55,98 +33,9 @@ You can imagine that we'd like to use this information in a number of ways, such
 - Searching for tracks based on attributes of the artist (e.g., all tracks
   performed by artists at Interscope)
 
-## Domain Modeling
-
-Domain Modeling allows us to outline the data values that we need to persist.
-- We only consider the specific data our application needs, but not the behavior of the application
-- A domain model in problem solving and software engineering is a conceptual model of all items and topics related to a specific problem
-- It describes the various entities, their attributes, roles and relationships, plus the constraints that govern the problem domain
-
-The big takeaway here is that domain modeling **does not describe solutions to the problem**. Instead, it defines how our data is structured.
-
-### ERDs
-
-An ERD -- or **Entity Relationship Diagram** -- is a tool we use to visualize and describe the data relating to the major entities that will exist in our programs.
-- Ultimately lends itself to planning out and creating our database table structure
-- It allows us to outline the data in our application, not the behavior
-
-### Example: An Orchard
-
-Take a minute to look through the below diagram. Note down any observations you have.
-
-![orchard example](images/orchard.png)
-
-- The squares represent our entities and are filled with the attributes associated with our entity.
-- The arrows between the squares indicate how the entities relate to one another.
-
-### Relationships
-
-![relationships](images/sample-relationships.png)
-
-**One-to-one:** A Country has one Capital City
-- Usually denotes that one entity should be an attribute of the other
-- Usually separated for physical space considerations
-
-**One-to-many:** A Location has many Cohorts
-- The most common relationship you will define in WDI.
-
-**Many-to-many:** A Membership has many Assignments through Submissions, and an Assignment has many Memberships through Submissions.
-- Requires a join table. In this example, that is Submissions.
-
-#### ERD Symbols Guide
-<details>
-  <summary> Legend </summary>
-  <img src="./images/erd-notation.png">
-</details>
-
 ## JOINS
 
-To `SELECT` information on two or more tables at ones, we can use a `JOIN` clause.
-This will produce rows that contain information from both tables. When joining
-two or more tables, we have to tell the database how to match up the rows.
-(e.g. to make sure the author information is correct for each book).
-
-This is done using the `ON` clause, which specifies which properties to match.
-
-```SQL
-SELECT country.language
-FROM countrylanguage
-JOIN country ON country.code = countrylanguage.countrycode
-WHERE country.name = 'Netherlands';
-```
-
-Notice that now we should include the table name for each column.
-In some cases this isn't necessary where SQL can disambiguate the columns
-between the various tables, but it makes parsing the statement much easier
-when table names are explicitly included.
-
-Also, our select items can be more varied now and include either all or
-just some of the columns from the associated tables.
-
-```SQL
-SELECT *
-FROM country
-JOIN countrylanguage ON country.code = countrylanguage.countrycode
-WHERE country.name = 'Brazil';
-```
-
-```SQL
-SELECT country.indepyear, city.district
-FROM city
-JOIN country ON country.code = city.countrycode
-WHERE city.name = 'Kabul';
-```
-## You Do (Carmen Practice) 15 min
-- Find the name of the country where `Mendoza` is located
-- Write a query that returns the country's head of state and the city's district
-  where the city name is `Araguari`.
-- Going back to the first two hints of the [Carmen homework](https://git.generalassemb.ly/wdi-nyc-thundercats/HW_U02_D02_SQL_APIs/tree/master/sql), try to find the
-  language spoken in the least populous city in Southern Europe.
-
-- Bonus: See how many clues you can solve using joins.  This may require a few
-  small adjustments :)
-
-## Building it up again
+### Building it from the ground up
 Let's build out our spotify database, starting with artist, album, and track.
 Note how id's are PRIMARY KEYs, and relationships are established when these
 ids are referenced by other tables.
@@ -174,6 +63,118 @@ CREATE TABLE track(
 );
 ```
 
+Using simple `SELECT` statements, if we wanted to find all songs by `Beyonce` we would have to execute to queries, e.g.:
+
+```sql
+spots=# SELECT * FROM artist WHERE name LIKE 'Beyonc%';
+           id           |  name
+------------------------+---------
+ 6vWDO969PvNqNYHIOW5v0m | Beyoncé
+(1 row)
+```
+
+And then copy + paste the artist.id into a `SELECT` query `FROM` the `track` table:
+
+```sql
+spots=# SELECT name FROM track WHERE artist_id = '6vWDO969PvNqNYHIOW5v0m';
+                       name
+--------------------------------------------------
+ Video Phone - Extended Remix featuring Lady Gaga
+ Crazy In Love
+ Drunk in Love
+ ***Flawless
+ Video Phone
+(5 rows)
+```
+We can see that the tables we are `SELECT`ing `FROM` are the exact tables defined in the db schema.  As will be shown below, SQL does not confine the user to simply querying data from individual tables.  It is possible, at least from a user interface perspective, to stitch together two tables along a common column such that the table to be queried from looks more like the following:
+
+```sql
+spots=# SELECT * FROM artist JOIN track ON track.artist_id = artist.id LIMIT 3;
+           id           |     name      |            name            |       artist_id        |        album_id        | disc_number | popularity |           id
+------------------------+---------------+----------------------------+------------------------+------------------------+-------------+------------+------------------------
+ 3HCpwNmFp2rvjkdjTs4uxs | Kyuss         | Demon Cleaner              | 3HCpwNmFp2rvjkdjTs4uxs | 1npen0QK3TNxZd2hLNzzOj |           1 |         52 | 2cVphsi72OjF7s0rtt2z5e
+ 1hCkSJcXREhrodeIHQdav8 | Ramin Djawadi | This World                 | 1hCkSJcXREhrodeIHQdav8 | 2poAUFGkHetMzM4xzLBVhY |           1 |         52 | 41otw6RUcMhVgO1LDOLmFX
+ 2gCsNOpiBaMNh20jQ5prf0 | Buddy Guy     | Baby Please Dont Leave Me | 2gCsNOpiBaMNh20jQ5prf0 | 7bkjnyiMG8mXzmEyfY49wD |           1 |         45 | 7JECM65zNFrYIHdvxj8NbO
+```
+
+How is this possible?
+
+To `SELECT` information on two or more tables at ones, we can use a `JOIN` clause.
+This will produce rows that contain information from both tables. When joining
+two or more tables, we have to tell the database how to match up the rows.
+(e.g. to make sure the author information is correct for each book).
+
+This is done using the `ON` clause, which specifies which properties to match.
+
+```
+SELECT artist.name, track.name FROM artist JOIN track ON track.artist_id = artist.id WHERE artist.name LIKE 'Beyon%';
+  name   |                       name
+---------+--------------------------------------------------
+ Beyoncé | Video Phone - Extended Remix featuring Lady Gaga
+ Beyoncé | Crazy In Love
+ Beyoncé | Drunk in Love
+ Beyoncé | ***Flawless
+ Beyoncé | Video Phone
+(5 rows)
+```
+
+Notice that now we should include the table name for each column.
+In some cases this isn't necessary where SQL can disambiguate the columns
+between the various tables, but it makes parsing the statement much easier
+when table names are explicitly included.
+
+Also, our select items can be more varied now and include either all or
+just some of the columns from the associated tables.
+
+```sql
+spots=# SELECT * FROM artist JOIN track ON track.artist_id = artist.id WHERE artist.name LIKE 'Beyon%';
+-[ RECORD 1 ]-------------------------------------------------
+id          | 6vWDO969PvNqNYHIOW5v0m
+name        | Beyoncé
+name        | Video Phone - Extended Remix featuring Lady Gaga
+artist_id   | 6vWDO969PvNqNYHIOW5v0m
+album_id    | 1wuC0jj7341uFOuCyqzwe8
+disc_number | 1
+popularity  | 53
+id          | 2nX9948PslVYrrHUf6w0eL
+-[ RECORD 2 ]-------------------------------------------------
+id          | 6vWDO969PvNqNYHIOW5v0m
+name        | Beyoncé
+name        | Crazy In Love
+artist_id   | 6vWDO969PvNqNYHIOW5v0m
+album_id    | 6oxVabMIqCMJRYN1GqR3Vf
+disc_number | 1
+popularity  | 80
+id          | 5IVuqXILoxVWvWEPm82Jxr
+-[ RECORD 3 ]-------------------------------------------------
+id          | 6vWDO969PvNqNYHIOW5v0m
+name        | Beyoncé
+name        | Drunk in Love
+artist_id   | 6vWDO969PvNqNYHIOW5v0m
+album_id    | 2UJwKSBUz6rtW4QLK74kQu
+disc_number | 1
+popularity  | 77
+id          | 6jG2YzhxptolDzLHTGLt7S
+-[ RECORD 4 ]-------------------------------------------------
+id          | 6vWDO969PvNqNYHIOW5v0m
+name        | Beyoncé
+name        | ***Flawless
+artist_id   | 6vWDO969PvNqNYHIOW5v0m
+album_id    | 2UJwKSBUz6rtW4QLK74kQu
+disc_number | 1
+popularity  | 68
+id          | 7tefUew2RUuSAqHyegMoY1
+-[ RECORD 5 ]-------------------------------------------------
+id          | 6vWDO969PvNqNYHIOW5v0m
+name        | Beyoncé
+name        | Video Phone
+artist_id   | 6vWDO969PvNqNYHIOW5v0m
+album_id    | 23Y5wdyP5byMFktZf8AcWU
+disc_number | 2
+popularity  | 55
+id          | 53hNzjDClsnsdYpLIwqXvn
+```
+
 ### What could go wrong?
 There are no explicit checks to ensure that we're actually obeying these references.
 
@@ -183,6 +184,7 @@ between tables are valid, and that new records cannot be inserted that break the
 constraints.  In other words, the `referential integrity` of our data is maintained.
 
 By using the `REFERENCES` keyword, foreign key constraints can be added to the schema.
+
 ```SQL
 CREATE TABLE track(
   name VARCHAR(255),
@@ -194,10 +196,27 @@ CREATE TABLE track(
 );
 ```
 
+After adding references, postgresql will now reject insert/update/delete queries that violate the consistency of the define relationships, viz., a track can't be added that either has an invalid artist_id.
+
+
 Note: `\d+` and a table name displays a helpful view of the structure of a table along with
 its relationships and constraints.
 
-## Join tables
+### Types of JOINS
+
+There are actually more than one type of `JOIN` statement.  See the following resource for a clean explanation:
+
+Which have we already seen?  The `JOIN` statement defaults to the inner join, since only records that have rows in both tables are displayed.
+
+[Visual Joins](http://www.dofactory.com/sql/join)
+
+[More Visual Joins](http://www.sql-join.com/sql-join-types/)
+
+And a nifty keyword postgresql provides for handling `null` values:
+
+[psql coalesce](http://www.postgresqltutorial.com/postgresql-coalesce/)
+
+## Join tables > Many-to-Many Relations
 Join Tables are used for Many-to-Many relationships.  They typically consist
 of at minimum, two foreign keys and possibly other metadata:
 
@@ -227,19 +246,7 @@ WHERE country.name = 'Brazil';
 ```
 
 # Lab Join Queries
-### first clone this repo
-### `createdb musicdb`
-### `psql -d musicdb -f seed.sql`
-
-- Identify all relations/constraints on the track table, are there any others?
-- Find all songs released on albums from the `Interscope` label
-- Find all of Beyoncé's tracks
-- Find all of the disc numbers only for Beyonce's tracks
-- Find all of the names of Beyoncé's albums
-- Find all of the album names, track names, and artist id associated with Beyoncé
-- Find all songs released on `Virgin Records` that have a `popularity` score > 30
-- Find the artist who has released tracks on the most albums
-    Hint: The last few may need more than one `join` clause each
+- Navigate to `lab` in this repo and follow the directions in the `README`
 
 # Further Practice
 

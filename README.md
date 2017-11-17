@@ -213,6 +213,25 @@ And a nifty keyword postgresql provides for handling `null` values:
 
 [psql coalesce](http://www.postgresqltutorial.com/postgresql-coalesce/)
 
+### Multi-Joins
+
+`JOIN` statements can also be linked together to query data across several tables.
+
+```sql
+SELECT album.name
+FROM album
+JOIN track ON track.album_id = album.id
+JOIN artist ON track.artist_id = artist.id
+WHERE artist.name LIKE 'Beyon%';
+
+name
+--------------------------------------
+I AM...SASHA FIERCE THE BONUS TRACKS
+Dangerously In Love
+BEYONCÉ [Platinum Edition]
+BEYONCÉ [Platinum Edition]
+I AM...SASHA FIERCE
+```
 ## Join tables > Many-to-Many Relations
 Join Tables are used for Many-to-Many relationships.  They typically consist
 of at minimum, two foreign keys and possibly other metadata:
@@ -230,7 +249,7 @@ CREATE TABLE likes(
 );
 ```
 
-[Further reading on joins with visual guide](https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/)
+The query above for all albums by Beyoncé is effectively a query across a join table, viz., albums, but due to the quirks of album/artist/track relations, `like`s are a slightly better example. 
 
 Also, `AS` can be used to give more descriptive names to the values returned
 by join clauses:

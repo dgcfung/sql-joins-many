@@ -1,5 +1,3 @@
-# LECTURE_U02_D04
-
 # Relationships in SQL / SQL JOINs
 
 ## Learning Objectives

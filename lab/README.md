@@ -24,11 +24,11 @@ After that, you should be all set to write the queries requested below.
 For this lab, you are expected to use the psql command line interface. For your convenience though, I have added a `queries.sql` file to movies_db directory. Feel free to write your queries in there and run them in psql with the `\i` command. It should look something like this:
 
 ```
-$ psql movies_db
+$ psql movies_lab_db
 psql (9.6.1)
 Type "help" for help.
 
-movies_db=# \i queries.sql
+movies_lab_db=# \i queries.sql
  id |  name
  ----+---------
  1 | John
@@ -39,7 +39,7 @@ movies_db=# \i queries.sql
  6 | Dominic
 (6 rows)
 
-movies_db=#
+movies_lab_db=#
 ```
 
 As you can see, my `queries.sql` file probably had something like `SELECT * FROM users;` in it.

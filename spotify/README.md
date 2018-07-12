@@ -1,7 +1,7 @@
 ## Further Lab
 
 - first clone this repo
-- Navigate to `spots`
+- Navigate to `spotify`
 -  `createdb musicdb`
 - `psql -d musicdb -f seed.sql`
 

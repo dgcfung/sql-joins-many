@@ -2,6 +2,7 @@
 
 ## Learning Objectives
 
+- Explain relationships in SQL and their intersection with HTTP endpoints
 - Implement a one-to-many relationship using Postgres
 - Create tables with foreign key references.
 - Select data from more than 1 table using a `join` query

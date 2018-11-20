@@ -164,7 +164,7 @@ WHERE countries.name = 'United States of America';
 
 ### Bonus
 
-Check out these awesome [aggregate function](http://www.postgresqltutorial.com/postgresql-aggregate-functions/)
+Check out these awesome [aggregate functions](http://www.postgresqltutorial.com/postgresql-aggregate-functions/)
 
 
 # Lab Join Queries

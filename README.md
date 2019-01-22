@@ -94,7 +94,7 @@ SELECT * FROM cities WHERE country_id = 1;
  id |  name   | population | country_id 
 ----+---------+------------+------------
   1 | Chicago |    2700000 |          1
-  2 | Chicago |    8538000 |          1
+  2 | New York |    8538000 |          1
 (2 rows)
 ```
 
@@ -108,7 +108,7 @@ WHERE countries.name = 'United States of America';
  id |  name   | population | country_id | id |           name           
 ----+---------+------------+------------+----+--------------------------
   1 | Chicago |    2700000 |          1 |  1 | United States of America
-  2 | Chicago |    8538000 |          1 |  1 | United States of America
+  2 | New York |    8538000 |          1 |  1 | United States of America
 (2 rows)
 ```
 
@@ -123,7 +123,7 @@ WHERE countries.name = 'United States of America';
  city_name | city_id |       country_name       
 -----------+---------+--------------------------
  Chicago   |       1 | United States of America
- Chicago   |       2 | United States of America
+ New York   |       2 | United States of America
 (2 rows)
 ```
 

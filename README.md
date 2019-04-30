@@ -1,11 +1,25 @@
-# Relationships in SQL / SQL JOINs
+---
+title: SQL Joins
+type: lesson
+duration: "2:20"
+creator:
+    name: Jay Nappy
+    modified by: Celeste Layne
+    city: NYC
+competencies: Databases
+---
+
+![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
+
+# SQL JOINs
 
 ## Learning Objectives
 
-- Explain relationships in SQL and their intersection with HTTP endpoints
+- What are JOIN tables?
+- Why do we need JOINS?
 - Implement a one-to-many relationship using Postgres
 - Create tables with foreign key references.
-- Select data from more than 1 table using a `join` query
+- Select data from more than one table using a `join` query
 
 
 ## Introduction
@@ -21,7 +35,7 @@ One of the key features of relational databases is that they can represent relat
 - one-to-many
 - many-to-many
 
-. . . as well as different variants of these relationships and other associated operations that are grounded on these approaches to structuring data.
+as well as different variants of these relationships and other associated operations that are grounded on these approaches to structuring data.
 
 The first relationship we will examine is the `one-to-many` relationshipl.
 
@@ -56,22 +70,11 @@ INSERT INTO cities (name, population, country_id) VALUES ('London', 8780000, 2);
 We say that a cities-to-countries is a **one-to-many** relationship. A country **has many** cities, and a city **belongs to** one country.
 
 
-#### Mini-Exercise
-Take a few minutes and brainstorm with your partner to come up with a few examples, either in the realm of web apps or real life, of entities that can be described using a *one-to-many* relationship.
+#### Check for Understanding
+Take a few minutes and brainstorm with your partner to come up with a few examples, either in the realm of web apps or real life, of entities that can be described using a *one-to-many* relationship. For example, the relationship between books and authors.
 
-Using the `REFERENCES` keyword, the database will ensure that the data between two tables is valid. If an `INSERT` query for a new city contains a country_id that doesn't exist, the row will not be inserted and the database will return an error:
+![](./images/one_to_many.png)
 
-```sql
-INSERT INTO cities (name, population, country_id) VALUES ('Madrid', 8780000, 3);
-
-ERROR:  insert or update on table "cities" violates foreign key constraint "cities_country_id_fkey"
-DETAIL:  Key (country_id)=(3) is not present in table "countries".
-```
-
-You can imagine that we'd like to use this information in a number of ways, such as...
-
-- Getting all cities in a provided country
-- Getting the most populous city in a provided country
 
 ## `SELECT`ing across tables
 

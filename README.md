@@ -39,7 +39,7 @@ as well as different variants of these relationships and other associated operat
 
 The first relationship we will examine is the `one-to-many` relationshipl.
 
-## One to Many:
+## One to Many
 
 Considering the country and city example, we could define a table for each:
 
@@ -130,7 +130,7 @@ WHERE countries.name = 'United States of America';
 (2 rows)
 ```
 
-### Joining data from multiple tables
+## Joining data from multiple tables
 
 `JOIN` statements can also be linked together to query data across several tables. Considering if we had another table representing soccer teams across the world:
 
@@ -164,14 +164,40 @@ WHERE countries.name = 'United States of America';
 (2 rows)
 ```
 
+## 🚀 Independent Practice :: Soccer Teams Lab
 
-### Bonus
+Navigate to the [soccer teams](https://git.generalassemb.ly/sei-nyc-jeopardy/sql-one-to-many-soccer-teams) repo and follow the directions in the `README`. Note: This is a one-to-many exercise.
 
-Check out these awesome [aggregate functions](http://www.postgresqltutorial.com/postgresql-aggregate-functions/)
+## Many to Many
 
+A many-to-many relationship exists between two entities if for one entity instance there may be multiple records in the other table, and vice versa.
 
-# Lab Join Queries
-- Navigate to `lab` in this repo and follow the directions in the `README`
+Example: A user can check out many books. A book can be checked out by many users (over time).
+
+![](./images/many_to_many.png)
+
+In order to implement this sort of relationship we need to introduce a third, cross-reference, table. This table holds the relationship between the two entities, by having two FOREIGN KEYs, each of which references the PRIMARY KEY of one of the tables for which we want to create this relationship. We already have our books and users tables, so we just need to create the cross-reference table: checkouts.
+
+What does the ERD for that look like?
+
+## 🚀 Independent Practice :: Movies DB Lab
+
+Navigate to the `lab` folder in this repo and follow the directions in the `README`. Note: This is a many-to-many exercise.
+
+## Summary
+
+To recap, here is a list of common relationships that you'll encounter when working with SQL:
+
+| Relationship | Example|
+| :--- | :--- |
+| one-to-one | A User has ONE address |
+| one-to-many | A book has MANY reviews |
+| many-to-many | A User has MANY books and a book has MANY Users |
+
+## 🚀 Independent Practice :: Library DB Lab
+
+Navigate to the [library database](https://git.generalassemb.ly/sei-nyc-jeopardy/library_sql) repo and follow the directions in the `README`.
+
 
 # Further Practice
 
@@ -181,3 +207,4 @@ Check out these awesome [aggregate functions](http://www.postgresqltutorial.com/
 - [W3 Schools SQL tutorial](https://www.w3schools.com/sql/)
 - [Postgres Guide](http://postgresguide.com/)
 - [SQL Course](http://www.sqlcourse.com/)
+- [aggregate functions](http://www.postgresqltutorial.com/postgresql-aggregate-functions/)

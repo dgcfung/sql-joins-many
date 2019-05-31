@@ -24,7 +24,7 @@ competencies: Databases
 
 ## Introduction
 
-While it is conceivable to store all of the data that is needed for a resource in a single table, there are downsides to the an approach. For example, if we had a table that holds cities, we might include the name of the city as well as the country the city is a party of. We would be repeating the name of a country like United States of America in every row for Atlanta, New York, Chicago, etc. If the name of the country changed (like U.S.S.R. to Russia), we would have to update every single row for every city in Russia. Redundancy of common data points can make altering or updating these fields difficult.
+While it is conceivable to store all of the data that is needed for a resource in a single table, there are downsides to the approach. For example, if we had a table that holds cities, we might include the name of the city as well as the country the city is a party of. We would be repeating the name of a country like United States of America in every row for Atlanta, New York, Chicago, etc. If the name of the country changed (like U.S.S.R. to Russia), we would have to update every single row for every city in Russia. Redundancy of common data points can make altering or updating these fields difficult.
 
 Further, there are weak guarantees for the consistency and correctness of hard-coded fields in a single column; what prevents a developer who is working on a different feature from using U.S.A. rather than United States of America when inserting a new city? Leveraging table relations can improve data integrity and provide stronger guarantees regarding the consistency and correctness of what we store and retrieve from a database.
 

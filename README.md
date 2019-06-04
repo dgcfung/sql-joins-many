@@ -4,7 +4,7 @@ type: lesson
 duration: "2:20"
 creator:
     name: Jay Nappy
-    modified by: Celeste Layne
+    modified by: Steve VW
     city: NYC
 competencies: Databases
 ---

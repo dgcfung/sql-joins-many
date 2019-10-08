@@ -45,12 +45,12 @@ Considering the country and city example, we could define a table for each:
 
 ```sql
 CREATE TABLE countries (
-  id BIGSERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name TEXT
 );
 
 CREATE TABLE cities (
-  id BIGSERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name TEXT,
   population INTEGER,
   country_id INTEGER REFERENCES countries(id)
@@ -136,7 +136,7 @@ WHERE countries.name = 'United States of America';
 
 ```sql
 CREATE TABLE soccer_teams (
-  id BIGSERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name TEXT,
   city_id INTEGER REFERENCES cities(id)
 );

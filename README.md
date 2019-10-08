@@ -37,7 +37,15 @@ One of the key features of relational databases is that they can represent relat
 
 as well as different variants of these relationships and other associated operations that are grounded on these approaches to structuring data.
 
-The first relationship we will examine is the `one-to-many` relationshipl.
+The first relationship we will examine is the `one-to-many` relationship. We will establish the relationship with a Foreign Key.
+
+A foreign key is a field or group of fields in a table that uniquely identifies a row in another table. In other words, a foreign key is defined in a table that references to the primary key of the other table.
+
+The table that contains the foreign key is called referencing table or child table. And the table to which the foreign key references is called referenced table or parent table.
+
+A table can have multiple foreign keys depending on its relationships with other tables.
+
+In PostgreSQL, you define a foreign key through a foreign key constraint. A foreign key constraint indicates that values in a column or a group of columns in the child table match with the values in a column or a group of columns of the parent table. We say that a foreign key constraint maintains referential integrity between child and parent tables.
 
 ## One to Many
 

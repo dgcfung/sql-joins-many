@@ -166,7 +166,7 @@ WHERE countries.name = 'United States of America';
 
 ## 🚀 Independent Practice :: Soccer Teams Lab
 
-Navigate to the [soccer teams](https://git.generalassemb.ly/sei-nyc-thunderbolt/sql-one-to-many-soccer-teams) repo and follow the directions in the `README`. Note: This is a one-to-many exercise.
+Navigate to the [soccer teams](https://git.generalassemb.ly/sei-nyc-oasis/sql-one-to-many-soccer-teams) repo and follow the directions in the `README`. Note: This is a one-to-many exercise.
 
 ## Many to Many
 

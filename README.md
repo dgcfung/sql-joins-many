@@ -39,6 +39,8 @@ as well as different variants of these relationships and other associated operat
 
 The first relationship we will examine is the `one-to-many` relationship. We will establish the relationship with a Foreign Key.
 
+## Foreign Key
+
 A foreign key is a field or group of fields in a table that uniquely identifies a row in another table. In other words, a foreign key is defined in a table that references to the primary key of the other table.
 
 The table that contains the foreign key is called referencing table or child table. And the table to which the foreign key references is called referenced table or parent table.

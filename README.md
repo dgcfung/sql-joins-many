@@ -206,7 +206,7 @@ To recap, here is a list of common relationships that you'll encounter when work
 
 ## 🚀 Independent Practice :: Library DB Lab
 
-Navigate to the [library database](https://git.generalassemb.ly/sei-nyc-oasis/library_sql) repo and follow the directions in the `README`.
+Navigate to the [library database](https://git.generalassemb.ly/sei-nyc-your-cohort/library_sql) repo and follow the directions in the `README`.
 
 
 # Further Practice

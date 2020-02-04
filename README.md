@@ -135,9 +135,9 @@ WHERE countries.name = 'United States of America';
 
 ```sql
 CREATE TABLE soccer_teams (
-  id SERIAL PRIMARY KEY,
-  name TEXT,
-  city_id INTEGER REFERENCES cities(id)
+    team_id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    city_id INT REFERENCES cities(city_id) 
 );
 
 INSERT INTO soccer_teams (name, city_id) VALUES ('New York City FC', 1);

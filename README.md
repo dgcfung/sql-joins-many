@@ -179,10 +179,6 @@ In order to implement this sort of relationship we need to introduce a third, cr
 
 What does the ERD for that look like?
 
-## 🚀 Independent Practice :: Movies DB Lab
-
-Navigate to the `lab` folder in this repo and follow the directions in the `README`. Note: This is a many-to-many exercise.
-
 ## Summary
 
 To recap, here is a list of common relationships that you'll encounter when working with SQL:
@@ -192,11 +188,6 @@ To recap, here is a list of common relationships that you'll encounter when work
 | one-to-one | A User has ONE address |
 | one-to-many | A book has MANY reviews |
 | many-to-many | A User has MANY books and a book has MANY Users |
-
-## 🚀 Independent Practice :: Library DB Lab
-
-Navigate to the [library database](https://git.generalassemb.ly/sei-nyc-your-cohort/library_sql) repo and follow the directions in the `README`.
-
 
 # Further Practice
 

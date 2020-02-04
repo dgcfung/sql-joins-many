@@ -1,14 +1,3 @@
----
-title: SQL Joins
-type: lesson
-duration: "2:20"
-creator:
-    name: Jay Nappy
-    modified by: Steve VW
-    city: NYC
-competencies: Databases
----
-
 ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
 # SQL JOINs
@@ -55,15 +44,15 @@ Considering the country and city example, we could define a table for each:
 
 ```sql
 CREATE TABLE countries (
-  id SERIAL PRIMARY KEY,
-  name TEXT
+    country_id SERIAL UNIQUE PRIMARY KEY,
+    name TEXT NOT NULL
 );
 
 CREATE TABLE cities (
-  id SERIAL PRIMARY KEY,
-  name TEXT,
-  population INTEGER,
-  country_id INTEGER REFERENCES countries(id)
+    city_id SERIAL UNIQUE PRIMARY KEY,
+    name TEXT NOT NUll,
+    population INT,
+    country_id INT REFERENCES countries(country_id)
 );
 ```
 
